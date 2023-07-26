@@ -1,24 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
+import Posts from "./Posts";
+import Users from "./Users"
+import Comments from "./Comments"
+import { useState } from "react";
+import './index.css'
 
 function App() {
+
+  const [activePage, setActivePage] = useState(0)
+
+  const setPost = () => {
+    setActivePage(0)
+  }
+
+  const setUsers = () => {
+    setActivePage(1)
+  }
+
+  const setComments = () => {
+    setActivePage(2)
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <div>
+        <div className="buttons">
+          <button onClick={setPost} className={activePage === 0 ? "active" : ""}>Post</button>
+          <button onClick={setUsers} className={activePage === 1 ? "active" : ""}>Users</button>
+          <button onClick={setComments} className={activePage === 2 ? "active" : ""}>Comments</button>
+        </div>
+        
+        {activePage === 0 && <Posts/> }
+        {activePage === 1 && <Users/>}
+        {activePage === 2 && <Comments/>}
+      </div>
+    </>
   );
 }
 
